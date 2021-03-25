@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="" content="">
+    <title></title>
+  </head>
+  <body>
+    <form  method="post" id="eform">
+      <input type="text" name="input" id="input" value="test 1" />
+      <input type="text" name="input2" id="input2" value="test 2" />
+      <input type="file" name="file_img" id="file_img"/>
+      <button type="submit">submit</button>
+    </form>
+    <a href="#" id="link"></a>
+  </body>
+  <script type="text/javascript" charset="utf-8">
+    document.getElementById('eform').addEventListener('submit',function(e) {
+      e.preventDefault();
+      var fd = new FormData(this);
+      //fd.append('input' , document.getElementById('input'));
+      fetch('post/',{ method : 'post',body : fd})
+      .then(function(res) { return res.text(); })
+      .then(function(data) {
+        document.getElementById('link').innerText = data;
+        document.getElementById('link').setAttribute('href',data);
+      });
+    });
+  </script>
+</html>
